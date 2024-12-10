@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoURI = process.env.MONGO_URI
-const corsOptions = { origin: "https://your-frontend-url.vercel.app" };
+const corsOptions = { origin: "https://todo-frontend-rust-ten.vercel.app/" };
 
 
 const app = express();
