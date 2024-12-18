@@ -2,15 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const mongoURI = process.env.MONGO_URI
-const corsOptions = { origin: "https://todo-frontend-rust-ten.vercel.app/" };
-
 
 const app = express();
-const PORT = process.env.PORT;
+const mongoURI = process.env.MONGO_URI;
 
 // Middleware
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB Connection
@@ -29,7 +26,7 @@ const TaskSchema = new mongoose.Schema({
 });
 const Task = mongoose.model("Task", TaskSchema);
 
-// CRUD Endpoints
+// Routes
 app.get("/api/tasks", async (req, res) => {
   const tasks = await Task.find();
   res.json(tasks);
@@ -51,5 +48,4 @@ app.delete("/api/tasks/:id", async (req, res) => {
   res.json({ message: "Task deleted successfully" });
 });
 
-// Start Server
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+module.exports = app;
